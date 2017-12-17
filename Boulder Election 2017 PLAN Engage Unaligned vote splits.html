@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>GPS data</title>
+		<base target="_top"></base>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta name="geo.position" content="40.0215685; -105.2384615" />
+		<meta name="ICBM" content="40.0215685, -105.2384615" />
+	</head>
+	<body style="margin:0px;">
+		<script type="text/javascript">
+			google_api_key = ''; // Your project's Google Maps API key goes here (https://code.google.com/apis/console)
+			language_code = '';
+			document.writeln('<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;libraries=geometry&amp;language='+(self.language_code?self.language_code:'')+'&amp;key='+(self.google_api_key?self.google_api_key:'')+'"><'+'/script>');
+			
+			thunderforest_api_key = ''; // To display OpenStreetMap tiles from ThunderForest, you need a key (http://www.thunderforest.com/docs/apikeys/)
+		</script>
+		
+		<!--
+			If you want to transplant this map into another Web page, by far the best method is to
+			simply include it in a IFRAME tag (see http://www.gpsvisualizer.com/faq.html#google_html).
+			But, if you must paste the code into another page, be sure to include all of these parts:
+			   1. The "div" tags that contain the map and its widgets, below
+			   2. Three sections of JavaScript code:
+			      a. The Google code (maps.google.com or googleapis.com) code, above
+			      b. "gv_options" and the code that calls a .js file on maps.gpsvisualizer.com
+			      c. The "GV_Map" function, which contains all the geographic info for the map
+		-->
+		<div style="margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px;">
+			<div id="gmap_div" style="width:700px; height:700px; margin:0px; margin-right:12px; background-color:#f0f0f0; float:left; overflow:hidden;">
+				<p align="center" style="font:10px Arial;">This map was created using <a target="_blank" href="http://www.gpsvisualizer.com/">GPS Visualizer</a>'s do-it-yourself geographic utilities.<br /><br />Please wait while the map data loads...</p>
+			</div>
+				
+			<div id="gv_infobox" class="gv_infobox" style="font:11px Arial; border:solid #666666 1px; background-color:#ffffff; padding:4px; overflow:auto; display:none; ">
+				<div id="gv_legend_header" style="padding-bottom:2px;"><b>PLANvsEngagePercent</b></div>
+				<div class="gv_legend_item"><span style="color:#cc0000;">&#9608; 59.00</span></div>
+				<div class="gv_legend_item"><span style="color:#cc0066;">&#9608; 54.50</span></div>
+				<div class="gv_legend_item"><span style="color:#cc00cc;">&#9608; 50.00</span></div>
+				<div class="gv_legend_item"><span style="color:#6600cc;">&#9608; 45.50</span></div>
+				<div class="gv_legend_item"><span style="color:#0000cc;">&#9608; 41.00</span></div>
+			</div>
+
+
+
+			<div id="gv_marker_list" class="gv_marker_list" style="background-color:#ffffff; overflow:auto; display:none;"><!-- --></div>
+
+			<div id="gv_clear_margins" style="height:0px; clear:both;"><!-- clear the "float" --></div>
+		</div>
+
+		
+		<!-- begin GPS Visualizer setup script (must come after maps.google.com code) -->
+		<script type="text/javascript">
+			/* Global variables used by the GPS Visualizer functions (20171217153733): */
+			gv_options = {};
+			
+			// basic map parameters:
+			gv_options.center = [40.0215685,-105.2384615];  // [latitude,longitude] - be sure to keep the square brackets
+			gv_options.zoom = 12;  // higher number means closer view; can also be 'auto' for automatic zoom/center based on map elements
+			gv_options.map_type = 'GV_HYBRID';  // popular map_type choices are 'GV_STREET', 'GV_SATELLITE', 'GV_HYBRID', 'GV_TERRAIN', 'GV_OSM', 'GV_TOPO_US', 'GV_TOPO_WORLD' (http://www.gpsvisualizer.com/misc/google_map_types.html)
+			gv_options.map_opacity = 1.00;  // number from 0 to 1
+			gv_options.full_screen = true;  // true|false: should the map fill the entire page (or frame)?
+			gv_options.width = 700;  // width of the map, in pixels
+			gv_options.height = 700;  // height of the map, in pixels
+			
+			gv_options.map_div = 'gmap_div';  // the name of the HTML "div" tag containing the map itself; usually 'gmap_div'
+			gv_options.doubleclick_zoom = true;  // true|false: zoom in when mouse is double-clicked?
+			gv_options.doubleclick_center = true;  // true|false: re-center the map on the point that was double-clicked?
+			gv_options.scroll_zoom = true; // true|false; or 'reverse' for down=in and up=out
+			gv_options.page_scrolling = true; // true|false; does the map relenquish control of the scroll wheel when embedded in scrollable pages?
+			gv_options.autozoom_adjustment = 0;
+			gv_options.centering_options = { 'open_info_window':true, 'partial_match':true, 'center_key':'center', 'default_zoom':null } // URL-based centering (e.g., ?center=name_of_marker&zoom=14)
+			gv_options.street_view = false; // true|false: allow Google Street View on the map
+			gv_options.tilt = false; // true|false: allow Google to show 45-degree tilted aerial imagery?
+			gv_options.animated_zoom = false; // true|false: may or may not work properly
+			gv_options.disable_google_pois = false;  // true|false: if you disable clickable POIs, you also lose the labels on parks, airports, etc.
+			
+			// widgets on the map:
+			gv_options.zoom_control = 'large'; // 'large'|'small'|'none'
+			gv_options.recenter_button = true; // true|false: is there a 'click to recenter' option in the zoom control?
+			gv_options.scale_control = true; // true|false
+			gv_options.map_opacity_control = false;  // true|false: does it appear on the map itself?
+			gv_options.map_type_control = {};  // widget to change the background map
+			  gv_options.map_type_control.visible = true;  // true|false: does it appear on the map itself?
+			  gv_options.map_type_control.filter = false;  // true|false: when map loads, are irrelevant maps ignored?
+			  gv_options.map_type_control.excluded = [];  // comma-separated list of quoted map IDs that will never show in the list ('included' also works)
+			gv_options.center_coordinates = true;  // true|false: show a "center coordinates" box and crosshair?
+			gv_options.measurement_tools = true;  // true|false: does it appear on the map itself?
+			gv_options.measurement_options = { visible:false, distance_color:'', area_color:'' };
+			gv_options.crosshair_hidden = true;  // true|false: hide the crosshair initially?
+			gv_options.mouse_coordinates = false;  // true|false: show a "mouse coordinates" box?
+			gv_options.utilities_menu = { 'maptype':true, 'opacity':true, 'measure':true, 'export':true };
+			gv_options.allow_export = false;  // true|false
+			
+			gv_options.infobox_options = {}; // options for a floating info box (id="gv_infobox"), which can contain anything
+			  gv_options.infobox_options.enabled = true;  // true|false: enable or disable the info box altogether
+			  gv_options.infobox_options.position = ['LEFT_BOTTOM',3,50];  // [Google anchor name, relative x, relative y]
+			  gv_options.infobox_options.draggable = true;  // true|false: can it be moved around the screen?
+			  gv_options.infobox_options.collapsible = true;  // true|false: can it be collapsed by double-clicking its top bar?
+
+			// marker-related options:
+			gv_options.default_marker = { color:'red',icon:'blankcircle',scale:1,opacity:0.7 }; // icon can be a URL, but be sure to also include size:[w,h] and optionally anchor:[x,y]
+			gv_options.vector_markers = false; // are the icons on the map in embedded SVG format?
+			gv_options.marker_tooltips = true; // do the names of the markers show up when you mouse-over them?
+			gv_options.marker_shadows = true; // true|false: do the standard markers have "shadows" behind them?
+			gv_options.marker_link_target = '_blank'; // the name of the window or frame into which markers' URLs will load
+			gv_options.info_window_width = 300;  // in pixels, the width of the markers' pop-up info "bubbles" (can be overridden by 'window_width' in individual markers)
+			gv_options.thumbnail_width = 0;  // in pixels, the width of the markers' thumbnails (can be overridden by 'thumbnail_width' in individual markers)
+			gv_options.photo_size = [0,0];  // in pixels, the size of the photos in info windows (can be overridden by 'photo_width' or 'photo_size' in individual markers)
+			gv_options.hide_labels = false;  // true|false: hide labels when map first loads?
+			gv_options.labels_behind_markers = false; // true|false: are the labels behind other markers (true) or in front of them (false)?
+			gv_options.label_offset = [0,0];  // [x,y]: shift all markers' labels (positive numbers are right and down)
+			gv_options.label_centered = false;  // true|false: center labels with respect to their markers?  (label_left is also a valid option.)
+			gv_options.driving_directions = false;  // put a small "driving directions" form in each marker's pop-up window? (override with dd:true or dd:false in a marker's options)
+			gv_options.garmin_icon_set = 'gpsmap'; // 'gpsmap' are the small 16x16 icons; change it to '24x24' for larger icons
+			gv_options.marker_list_options = {};  // options for a dynamically-created list of markers
+			  gv_options.marker_list_options.enabled = false;  // true|false: enable or disable the marker list altogether
+			  gv_options.marker_list_options.floating = true;  // is the list a floating box inside the map itself?
+			  gv_options.marker_list_options.position = ['RIGHT_BOTTOM',6,38];  // floating list only: position within map
+			  gv_options.marker_list_options.min_width = 160; // minimum width, in pixels, of the floating list
+			  gv_options.marker_list_options.max_width = 160;  // maximum width
+			  gv_options.marker_list_options.min_height = 0;  // minimum height, in pixels, of the floating list
+			  gv_options.marker_list_options.max_height = 310;  // maximum height
+			  gv_options.marker_list_options.draggable = true;  // true|false, floating list only: can it be moved around the screen?
+			  gv_options.marker_list_options.collapsible = true;  // true|false, floating list only: can it be collapsed by double-clicking its top bar?
+			  gv_options.marker_list_options.include_tickmarks = false;  // true|false: are distance/time tickmarks included in the list?
+			  gv_options.marker_list_options.include_trackpoints = false;  // true|false: are "trackpoint" markers included in the list?
+			  gv_options.marker_list_options.dividers = false;  // true|false: will a thin line be drawn between each item in the list?
+			  gv_options.marker_list_options.desc = false;  // true|false: will the markers' descriptions be shown below their names in the list?
+			  gv_options.marker_list_options.icons = true;  // true|false: should the markers' icons appear to the left of their names in the list?
+			  gv_options.marker_list_options.thumbnails = false;  // true|false: should markers' thumbnails be shown in the list?
+			  gv_options.marker_list_options.folders_collapsed = false;  // true|false: do folders in the list start out in a collapsed state?
+			  gv_options.marker_list_options.folders_hidden = false;  // true|false: do folders in the list start out in a hidden state?
+			  gv_options.marker_list_options.collapsed_folders = []; // an array of folder names
+			  gv_options.marker_list_options.hidden_folders = []; // an array of folder names
+			  gv_options.marker_list_options.count_folder_items = false;  // true|false: list the number of items in each folder?
+			  gv_options.marker_list_options.wrap_names = true;  // true|false: should marker's names be allowed to wrap onto more than one line?
+			  gv_options.marker_list_options.unnamed = '[unnamed]';  // what 'name' should be assigned to  unnamed markers in the list?
+			  gv_options.marker_list_options.colors = false;  // true|false: should the names/descs of the points in the list be colorized the same as their markers?
+			  gv_options.marker_list_options.default_color = '';  // default HTML color code for the names/descs in the list
+			  gv_options.marker_list_options.limit = 0;  // how many markers to show in the list; 0 for no limit
+			  gv_options.marker_list_options.center = false;  // true|false: does the map center upon a marker when you click its name in the list?
+			  gv_options.marker_list_options.zoom = false;  // true|false: does the map zoom to a certain level when you click on a marker's name in the list?
+			  gv_options.marker_list_options.zoom_level = 15;  // if 'zoom' is true, what level should the map zoom to?
+			  gv_options.marker_list_options.info_window = true;  // true|false: do info windows pop up when the markers' names are clicked in the list?
+			  gv_options.marker_list_options.url_links = false;  // true|false: do the names in the list become instant links to the markers' URLs?
+			  gv_options.marker_list_options.toggle = false;  // true|false: does a marker disappear if you click on its name in the list?
+			  gv_options.marker_list_options.help_tooltips = false;  // true|false: do "tooltips" appear on marker names that tell you what happens when you click?
+			  gv_options.marker_list_options.id = 'gv_marker_list';  // id of a DIV tag that holds the list
+			  gv_options.marker_list_options.header = ''; // HTML code; be sure to put backslashes in front of any single quotes, and don't include any line breaks
+			  gv_options.marker_list_options.footer = ''; // HTML code
+			gv_options.marker_filter_options = {};  // options for removing waypoints that are out of the current view
+			  gv_options.marker_filter_options.enabled = false;  // true|false: should out-of-range markers be removed?
+			  gv_options.marker_filter_options.movement_threshold = 8;  // in pixels, how far the map has to move to trigger filtering
+			  gv_options.marker_filter_options.limit = 0;  // maximum number of markers to display on the map; 0 for no limit
+			  gv_options.marker_filter_options.update_list = true;  // true|false: should the marker list be updated with only the filtered markers?
+			  gv_options.marker_filter_options.sort_list_by_distance = false;  // true|false: should the marker list be sorted by distance from the center of the map?
+			  gv_options.marker_filter_options.min_zoom = 0;  // below this zoom level, don't show any markers at all
+			  gv_options.marker_filter_options.zoom_message = '';  // message to put in the marker list if the map is below the min_zoom threshold
+			gv_options.synthesize_fields = {}; // for example: {label:'{name}'} would cause all markers' names to become visible labels
+				
+
+			
+			// Load GPS Visualizer's Google Maps functions (this must be loaded AFTER gv_options are set):
+			if (window.location.toString().indexOf('https://') == 0) { // secure pages require secure scripts
+				document.writeln('<script src="https://gpsvisualizer.com/google_maps/functions3.js" type="text/javascript"><'+'/script>');
+			} else {
+				document.writeln('<script src="http://maps.gpsvisualizer.com/google_maps/functions3.js" type="text/javascript"><'+'/script>');
+			}
+			
+		</script>
+		<style type="text/css">
+			/* Put any custom style definitions here (e.g., .gv_marker_info_window, .gv_marker_info_window_name, .gv_marker_list_item, .gv_tooltip, .gv_label, etc.) */
+			#gmap_div .gv_marker_info_window {
+				font-size:11px !important;
+			}
+			#gmap_div .gv_label {
+				opacity:0.80; filter:alpha(opacity=80);
+				color:white; background-color:#333333; border:1px solid black; padding:1px;
+				font:9px Verdana !important;
+				font-weight:normal !important;
+			}
+			
+		</style>
+		
+		<!-- end GPSV setup script and styles; begin map-drawing script (they must be separate) -->
+		<script type="text/javascript">
+			function GV_Map() {
+			  
+				GV_Setup_Map();
+				
+				
+				
+				GV_Draw_Marker({lat:40.0712570,lon:-105.1868960,name:'',desc:'<b>Precinct 800—PLAN vs. Engage 53.1%</b><BR>Total ballots: 230<br>PLAN Boulder: 44.4% <br>Engage Boulder: 39.2%<br>Unaligned: 16.4%',color:'#cc0086',icon:'',scale:0.425});
+				GV_Draw_Marker({lat:40.0755910,lon:-105.1949210,name:'',desc:'<b>Precinct 801—PLAN vs. Engage 53.3%</b><BR>Total ballots: 209<br>PLAN Boulder: 44% <br>Engage Boulder: 38.5%<br>Unaligned: 17.5%',color:'#cc0081',icon:'',scale:0.404});
+				GV_Draw_Marker({lat:40.0666260,lon:-105.2012290,name:'',desc:'<b>Precinct 802—PLAN vs. Engage 71.6%</b><BR>Total ballots: 140<br>PLAN Boulder: 64.1% <br>Engage Boulder: 25.4%<br>Unaligned: 10.5%',color:'#cc0000',icon:'',scale:0.336});
+				GV_Draw_Marker({lat:40.0605500,lon:-105.2199830,name:'',desc:'<b>Precinct 804—PLAN vs. Engage 59.2%</b><BR>Total ballots: 201<br>PLAN Boulder: 50.6% <br>Engage Boulder: 34.9%<br>Unaligned: 14.5%',color:'#cc0000',icon:'',scale:0.396});
+				GV_Draw_Marker({lat:40.0655460,lon:-105.2860460,name:'',desc:'<b>Precinct 806—PLAN vs. Engage 45.7%</b><BR>Total ballots: 592<br>PLAN Boulder: 39.4% <br>Engage Boulder: 46.8%<br>Unaligned: 13.8%',color:'#6a00cc',icon:'',scale:0.78});
+				GV_Draw_Marker({lat:40.0531260,lon:-105.2867170,name:'',desc:'<b>Precinct 807—PLAN vs. Engage 57.2%</b><BR>Total ballots: 646<br>PLAN Boulder: 50.2% <br>Engage Boulder: 37.6%<br>Unaligned: 12.3%',color:'#cc0029',icon:'',scale:0.833});
+				GV_Draw_Marker({lat:40.0570020,lon:-105.2771040,name:'',desc:'<b>Precinct 808—PLAN vs. Engage 49.9%</b><BR>Total ballots: 816<br>PLAN Boulder: 44.3% <br>Engage Boulder: 44.5%<br>Unaligned: 11.2%',color:'#ca00cc',icon:'',scale:1});
+				GV_Draw_Marker({lat:40.0476070,lon:-105.2772750,name:'',desc:'<b>Precinct 809—PLAN vs. Engage 53.2%</b><BR>Total ballots: 612<br>PLAN Boulder: 47.4% <br>Engage Boulder: 41.7%<br>Unaligned: 10.9%',color:'#cc0084',icon:'',scale:0.8});
+				GV_Draw_Marker({lat:40.0507610,lon:-105.2683490,name:'',desc:'<b>Precinct 810—PLAN vs. Engage 53.8%</b><BR>Total ballots: 503<br>PLAN Boulder: 46.5% <br>Engage Boulder: 39.9%<br>Unaligned: 13.6%',color:'#cc0076',icon:'',scale:0.693});
+				GV_Draw_Marker({lat:40.0496860,lon:-105.2509650,name:'',desc:'<b>Precinct 811—PLAN vs. Engage 50.5%</b><BR>Total ballots: 400<br>PLAN Boulder: 44.4% <br>Engage Boulder: 43.5%<br>Unaligned: 12.1%',color:'#cc00c1',icon:'',scale:0.592});
+				GV_Draw_Marker({lat:40.0430500,lon:-105.2512660,name:'',desc:'<b>Precinct 812—PLAN vs. Engage 58.6%</b><BR>Total ballots: 338<br>PLAN Boulder: 49.9% <br>Engage Boulder: 35.2%<br>Unaligned: 14.9%',color:'#cc0009',icon:'',scale:0.531});
+				GV_Draw_Marker({lat:40.0350910,lon:-105.2262120,name:'',desc:'<b>Precinct 813—PLAN vs. Engage 76.9%</b><BR>Total ballots: 164<br>PLAN Boulder: 70.1% <br>Engage Boulder: 21%<br>Unaligned: 8.9%',color:'#cc0000',icon:'',scale:0.36});
+				GV_Draw_Marker({lat:40.0328640,lon:-105.2411800,name:'',desc:'<b>Precinct 814—PLAN vs. Engage 54.8%</b><BR>Total ballots: 550<br>PLAN Boulder: 47.7% <br>Engage Boulder: 39.4%<br>Unaligned: 12.9%',color:'#cc005f',icon:'',scale:0.739});
+				GV_Draw_Marker({lat:40.0377930,lon:-105.2489050,name:'',desc:'<b>Precinct 815—PLAN vs. Engage 48.1%</b><BR>Total ballots: 289<br>PLAN Boulder: 42.2% <br>Engage Boulder: 45.6%<br>Unaligned: 12.1%',color:'#a100cc',icon:'',scale:0.483});
+				GV_Draw_Marker({lat:40.0413090,lon:-105.2607930,name:'',desc:'<b>Precinct 816—PLAN vs. Engage 51.8%</b><BR>Total ballots: 489<br>PLAN Boulder: 45.2% <br>Engage Boulder: 42.1%<br>Unaligned: 12.7%',color:'#cc00a4',icon:'',scale:0.679});
+				GV_Draw_Marker({lat:40.0411110,lon:-105.2678310,name:'',desc:'<b>Precinct 817—PLAN vs. Engage 52%</b><BR>Total ballots: 517<br>PLAN Boulder: 43.8% <br>Engage Boulder: 40.5%<br>Unaligned: 15.7%',color:'#cc009f',icon:'',scale:0.706});
+				GV_Draw_Marker({lat:40.0409140,lon:-105.2773580,name:'',desc:'<b>Precinct 818—PLAN vs. Engage 55.7%</b><BR>Total ballots: 602<br>PLAN Boulder: 49.1% <br>Engage Boulder: 39.1%<br>Unaligned: 11.8%',color:'#cc004a',icon:'',scale:0.79});
+				GV_Draw_Marker({lat:40.0329300,lon:-105.2774870,name:'',desc:'<b>Precinct 819—PLAN vs. Engage 59%</b><BR>Total ballots: 504<br>PLAN Boulder: 52.6% <br>Engage Boulder: 36.5%<br>Unaligned: 10.9%',color:'#cc0000',icon:'',scale:0.694});
+				GV_Draw_Marker({lat:40.0330610,lon:-105.2699340,name:'',desc:'<b>Precinct 820—PLAN vs. Engage 58%</b><BR>Total ballots: 408<br>PLAN Boulder: 52.4% <br>Engage Boulder: 37.9%<br>Unaligned: 9.7%',color:'#cc0017',icon:'',scale:0.599});
+				GV_Draw_Marker({lat:40.0324700,lon:-105.2632390,name:'',desc:'<b>Precinct 821—PLAN vs. Engage 54.3%</b><BR>Total ballots: 496<br>PLAN Boulder: 48% <br>Engage Boulder: 40.4%<br>Unaligned: 11.7%',color:'#cc006a',icon:'',scale:0.686});
+				GV_Draw_Marker({lat:40.0347370,lon:-105.2512230,name:'',desc:'<b>Precinct 822—PLAN vs. Engage 59.4%</b><BR>Total ballots: 304<br>PLAN Boulder: 51.5% <br>Engage Boulder: 35.2%<br>Unaligned: 13.3%',color:'#cc0000',icon:'',scale:0.497});
+				GV_Draw_Marker({lat:40.0221790,lon:-105.2385680,name:'',desc:'<b>Precinct 823—PLAN vs. Engage 49.7%</b><BR>Total ballots: 596<br>PLAN Boulder: 43.5% <br>Engage Boulder: 44%<br>Unaligned: 12.5%',color:'#c500cc',icon:'',scale:0.784});
+				GV_Draw_Marker({lat:40.0265240,lon:-105.2640500,name:'',desc:'<b>Precinct 824—PLAN vs. Engage 53.8%</b><BR>Total ballots: 536<br>PLAN Boulder: 47.3% <br>Engage Boulder: 40.7%<br>Unaligned: 12%',color:'#cc0076',icon:'',scale:0.725});
+				GV_Draw_Marker({lat:40.0279870,lon:-105.2767530,name:'',desc:'<b>Precinct 825—PLAN vs. Engage 54.9%</b><BR>Total ballots: 371<br>PLAN Boulder: 48.4% <br>Engage Boulder: 39.8%<br>Unaligned: 11.7%',color:'#cc005d',icon:'',scale:0.563});
+				GV_Draw_Marker({lat:40.0238130,lon:-105.2769670,name:'',desc:'<b>Precinct 826—PLAN vs. Engage 56.7%</b><BR>Total ballots: 460<br>PLAN Boulder: 50.5% <br>Engage Boulder: 38.6%<br>Unaligned: 10.9%',color:'#cc0034',icon:'',scale:0.651});
+				GV_Draw_Marker({lat:40.0208550,lon:-105.2712600,name:'',desc:'<b>Precinct 827—PLAN vs. Engage 56.2%</b><BR>Total ballots: 388<br>PLAN Boulder: 51% <br>Engage Boulder: 39.8%<br>Unaligned: 9.1%',color:'#cc0040',icon:'',scale:0.58});
+				GV_Draw_Marker({lat:40.0224490,lon:-105.2630840,name:'',desc:'<b>Precinct 828—PLAN vs. Engage 56.3%</b><BR>Total ballots: 267<br>PLAN Boulder: 48.8% <br>Engage Boulder: 37.9%<br>Unaligned: 13.3%',color:'#cc003d',icon:'',scale:0.461});
+				GV_Draw_Marker({lat:40.0190310,lon:-105.2631700,name:'',desc:'<b>Precinct 829—PLAN vs. Engage 54%</b><BR>Total ballots: 249<br>PLAN Boulder: 46.9% <br>Engage Boulder: 39.9%<br>Unaligned: 13.2%',color:'#cc0072',icon:'',scale:0.443});
+				GV_Draw_Marker({lat:40.0157770,lon:-105.2643720,name:'',desc:'<b>Precinct 830—PLAN vs. Engage 56.1%</b><BR>Total ballots: 176<br>PLAN Boulder: 46.6% <br>Engage Boulder: 36.5%<br>Unaligned: 16.8%',color:'#cc0041',icon:'',scale:0.372});
+				GV_Draw_Marker({lat:40.0156460,lon:-105.2716460,name:'',desc:'<b>Precinct 831—PLAN vs. Engage 51.1%</b><BR>Total ballots: 232<br>PLAN Boulder: 45.4% <br>Engage Boulder: 43.4%<br>Unaligned: 11.2%',color:'#cc00b3',icon:'',scale:0.427});
+				GV_Draw_Marker({lat:40.0174370,lon:-105.2770750,name:'',desc:'<b>Precinct 832—PLAN vs. Engage 40.5%</b><BR>Total ballots: 142<br>PLAN Boulder: 34.7% <br>Engage Boulder: 51%<br>Unaligned: 14.3%',color:'#0000cc',icon:'',scale:0.338});
+				GV_Draw_Marker({lat:40.0117840,lon:-105.2701870,name:'',desc:'<b>Precinct 833—PLAN vs. Engage 53.2%</b><BR>Total ballots: 140<br>PLAN Boulder: 45.1% <br>Engage Boulder: 39.6%<br>Unaligned: 15.2%',color:'#cc0084',icon:'',scale:0.336});
+				GV_Draw_Marker({lat:40.0056040,lon:-105.2663240,name:'',desc:'<b>Precinct 834—PLAN vs. Engage 66.9%</b><BR>Total ballots: 141<br>PLAN Boulder: 56.3% <br>Engage Boulder: 27.8%<br>Unaligned: 16%',color:'#cc0000',icon:'',scale:0.337});
+				GV_Draw_Marker({lat:40.0039930,lon:-105.2613460,name:'',desc:'<b>Precinct 835—PLAN vs. Engage 59.8%</b><BR>Total ballots: 129<br>PLAN Boulder: 50.4% <br>Engage Boulder: 33.9%<br>Unaligned: 15.6%',color:'#cc0000',icon:'',scale:0.326});
+				GV_Draw_Marker({lat:40.0121620,lon:-105.2584920,name:'',desc:'<b>Precinct 836—PLAN vs. Engage 59.2%</b><BR>Total ballots: 194<br>PLAN Boulder: 50.4% <br>Engage Boulder: 34.7%<br>Unaligned: 14.9%',color:'#cc0000',icon:'',scale:0.389});
+				GV_Draw_Marker({lat:40.0093190,lon:-105.2557460,name:'',desc:'<b>Precinct 837—PLAN vs. Engage 53.4%</b><BR>Total ballots: 212<br>PLAN Boulder: 46.3% <br>Engage Boulder: 40.4%<br>Unaligned: 13.3%',color:'#cc007f',icon:'',scale:0.407});
+				GV_Draw_Marker({lat:40.0105180,lon:-105.2469690,name:'',desc:'<b>Precinct 838—PLAN vs. Engage 56.4%</b><BR>Total ballots: 107<br>PLAN Boulder: 47.3% <br>Engage Boulder: 36.5%<br>Unaligned: 16.2%',color:'#cc003b',icon:'',scale:0.304});
+				GV_Draw_Marker({lat:40.0112420,lon:-105.2375610,name:'',desc:'<b>Precinct 839—PLAN vs. Engage 58.5%</b><BR>Total ballots: 386<br>PLAN Boulder: 50.2% <br>Engage Boulder: 35.6%<br>Unaligned: 14.2%',color:'#cc000b',icon:'',scale:0.578});
+				GV_Draw_Marker({lat:40.0101150,lon:-105.2326620,name:'',desc:'<b>Precinct 840—PLAN vs. Engage 48.8%</b><BR>Total ballots: 299<br>PLAN Boulder: 39.7% <br>Engage Boulder: 41.7%<br>Unaligned: 18.6%',color:'#b100cc',icon:'',scale:0.492});
+				GV_Draw_Marker({lat:40.0111800,lon:-105.2279240,name:'',desc:'<b>Precinct 841—PLAN vs. Engage 47.5%</b><BR>Total ballots: 352<br>PLAN Boulder: 39.1% <br>Engage Boulder: 43.2%<br>Unaligned: 17.7%',color:'#9300cc',icon:'',scale:0.545});
+				GV_Draw_Marker({lat:40.0001080,lon:-105.2189330,name:'',desc:'<b>Precinct 842—PLAN vs. Engage 63.4%</b><BR>Total ballots: 622<br>PLAN Boulder: 54.8% <br>Engage Boulder: 31.6%<br>Unaligned: 13.6%',color:'#cc0000',icon:'',scale:0.81});
+				GV_Draw_Marker({lat:40.0018220,lon:-105.2300810,name:'',desc:'<b>Precinct 843—PLAN vs. Engage 60.9%</b><BR>Total ballots: 763<br>PLAN Boulder: 52.8% <br>Engage Boulder: 33.9%<br>Unaligned: 13.4%',color:'#cc0000',icon:'',scale:0.948});
+				GV_Draw_Marker({lat:40.0030730,lon:-105.2386090,name:'',desc:'<b>Precinct 844—PLAN vs. Engage 60.1%</b><BR>Total ballots: 363<br>PLAN Boulder: 52.2% <br>Engage Boulder: 34.6%<br>Unaligned: 13.2%',color:'#cc0000',icon:'',scale:0.555});
+				GV_Draw_Marker({lat:40.0057290,lon:-105.2450600,name:'',desc:'<b>Precinct 845—PLAN vs. Engage 58.3%</b><BR>Total ballots: 334<br>PLAN Boulder: 50.5% <br>Engage Boulder: 36.1%<br>Unaligned: 13.4%',color:'#cc0010',icon:'',scale:0.527});
+				GV_Draw_Marker({lat:40.0051730,lon:-105.2564300,name:'',desc:'<b>Precinct 846—PLAN vs. Engage 59.7%</b><BR>Total ballots: 324<br>PLAN Boulder: 51.2% <br>Engage Boulder: 34.6%<br>Unaligned: 14.2%',color:'#cc0000',icon:'',scale:0.517});
+				GV_Draw_Marker({lat:40.0021000,lon:-105.2559060,name:'',desc:'<b>Precinct 847—PLAN vs. Engage 56.2%</b><BR>Total ballots: 139<br>PLAN Boulder: 45.1% <br>Engage Boulder: 35.1%<br>Unaligned: 19.8%',color:'#cc0040',icon:'',scale:0.335});
+				GV_Draw_Marker({lat:40.0021930,lon:-105.2483260,name:'',desc:'<b>Precinct 848—PLAN vs. Engage 52%</b><BR>Total ballots: 247<br>PLAN Boulder: 45.1% <br>Engage Boulder: 41.7%<br>Unaligned: 13.3%',color:'#cc009f',icon:'',scale:0.441});
+				GV_Draw_Marker({lat:39.9980390,lon:-105.2507450,name:'',desc:'<b>Precinct 849—PLAN vs. Engage 62.9%</b><BR>Total ballots: 101<br>PLAN Boulder: 53.4% <br>Engage Boulder: 31.5%<br>Unaligned: 15.1%',color:'#cc0000',icon:'',scale:0.298});
+				GV_Draw_Marker({lat:39.9962320,lon:-105.2414720,name:'',desc:'<b>Precinct 850—PLAN vs. Engage 59.5%</b><BR>Total ballots: 426<br>PLAN Boulder: 49.3% <br>Engage Boulder: 33.6%<br>Unaligned: 17.1%',color:'#cc0000',icon:'',scale:0.617});
+				GV_Draw_Marker({lat:39.9968490,lon:-105.2343750,name:'',desc:'<b>Precinct 851—PLAN vs. Engage 46.4%</b><BR>Total ballots: 562<br>PLAN Boulder: 39% <br>Engage Boulder: 45%<br>Unaligned: 16%',color:'#7b00cc',icon:'',scale:0.751});
+				GV_Draw_Marker({lat:39.9880460,lon:-105.2289520,name:'',desc:'<b>Precinct 852—PLAN vs. Engage 68%</b><BR>Total ballots: 494<br>PLAN Boulder: 59.8% <br>Engage Boulder: 28.1%<br>Unaligned: 12%',color:'#cc0000',icon:'',scale:0.684});
+				GV_Draw_Marker({lat:39.9906100,lon:-105.2344160,name:'',desc:'<b>Precinct 853—PLAN vs. Engage 47.2%</b><BR>Total ballots: 269<br>PLAN Boulder: 39.5% <br>Engage Boulder: 44.2%<br>Unaligned: 16.3%',color:'#8d00cc',icon:'',scale:0.463});
+				GV_Draw_Marker({lat:39.9873200,lon:-105.2417130,name:'',desc:'<b>Precinct 854—PLAN vs. Engage 58.3%</b><BR>Total ballots: 353<br>PLAN Boulder: 51.6% <br>Engage Boulder: 36.9%<br>Unaligned: 11.5%',color:'#cc0010',icon:'',scale:0.545});
+				GV_Draw_Marker({lat:39.9825160,lon:-105.2379640,name:'',desc:'<b>Precinct 855—PLAN vs. Engage 63.5%</b><BR>Total ballots: 332<br>PLAN Boulder: 56.3% <br>Engage Boulder: 32.3%<br>Unaligned: 11.5%',color:'#cc0000',icon:'',scale:0.525});
+				GV_Draw_Marker({lat:39.9774490,lon:-105.2409070,name:'',desc:'<b>Precinct 856—PLAN vs. Engage 61.5%</b><BR>Total ballots: 306<br>PLAN Boulder: 55.% <br>Engage Boulder: 34.5%<br>Unaligned: 10.5%',color:'#cc0000',icon:'',scale:0.499});
+				GV_Draw_Marker({lat:39.9733390,lon:-105.2471370,name:'',desc:'<b>Precinct 857—PLAN vs. Engage 57.7%</b><BR>Total ballots: 470<br>PLAN Boulder: 48.9% <br>Engage Boulder: 35.9%<br>Unaligned: 15.2%',color:'#cc001d',icon:'',scale:0.66});
+				GV_Draw_Marker({lat:39.9675460,lon:-105.2518740,name:'',desc:'<b>Precinct 858—PLAN vs. Engage 63.1%</b><BR>Total ballots: 548<br>PLAN Boulder: 55.8% <br>Engage Boulder: 32.7%<br>Unaligned: 11.5%',color:'#cc0000',icon:'',scale:0.737});
+				GV_Draw_Marker({lat:39.9734630,lon:-105.2627200,name:'',desc:'<b>Precinct 859—PLAN vs. Engage 59.2%</b><BR>Total ballots: 508<br>PLAN Boulder: 51% <br>Engage Boulder: 35.1%<br>Unaligned: 14.%',color:'#cc0000',icon:'',scale:0.698});
+				GV_Draw_Marker({lat:39.9744830,lon:-105.2565310,name:'',desc:'<b>Precinct 860—PLAN vs. Engage 54.7%</b><BR>Total ballots: 417<br>PLAN Boulder: 45.1% <br>Engage Boulder: 37.4%<br>Unaligned: 17.5%',color:'#cc0061',icon:'',scale:0.608});
+				GV_Draw_Marker({lat:39.9778660,lon:-105.2462490,name:'',desc:'<b>Precinct 861—PLAN vs. Engage 57.9%</b><BR>Total ballots: 353<br>PLAN Boulder: 50.3% <br>Engage Boulder: 36.6%<br>Unaligned: 13.1%',color:'#cc0019',icon:'',scale:0.545});
+				GV_Draw_Marker({lat:39.9768150,lon:-105.2543540,name:'',desc:'<b>Precinct 862—PLAN vs. Engage 58.9%</b><BR>Total ballots: 382<br>PLAN Boulder: 51.5% <br>Engage Boulder: 36%<br>Unaligned: 12.5%',color:'#cc0002',icon:'',scale:0.574});
+				GV_Draw_Marker({lat:39.9798430,lon:-105.2663490,name:'',desc:'<b>Precinct 863—PLAN vs. Engage 55.5%</b><BR>Total ballots: 487<br>PLAN Boulder: 48.1% <br>Engage Boulder: 38.5%<br>Unaligned: 13.4%',color:'#cc004f',icon:'',scale:0.677});
+				GV_Draw_Marker({lat:39.9810790,lon:-105.2515310,name:'',desc:'<b>Precinct 864—PLAN vs. Engage 60.8%</b><BR>Total ballots: 419<br>PLAN Boulder: 53.4% <br>Engage Boulder: 34.4%<br>Unaligned: 12.1%',color:'#cc0000',icon:'',scale:0.61});
+				GV_Draw_Marker({lat:39.9841380,lon:-105.2449390,name:'',desc:'<b>Precinct 865—PLAN vs. Engage 59.6%</b><BR>Total ballots: 289<br>PLAN Boulder: 51.7% <br>Engage Boulder: 35%<br>Unaligned: 13.3%',color:'#cc0000',icon:'',scale:0.483});
+				GV_Draw_Marker({lat:39.9894360,lon:-105.2508860,name:'',desc:'<b>Precinct 866—PLAN vs. Engage 65.7%</b><BR>Total ballots: 442<br>PLAN Boulder: 58.4% <br>Engage Boulder: 30.5%<br>Unaligned: 11.1%',color:'#cc0000',icon:'',scale:0.633});
+				GV_Draw_Marker({lat:39.9858060,lon:-105.2544550,name:'',desc:'<b>Precinct 867—PLAN vs. Engage 57.4%</b><BR>Total ballots: 368<br>PLAN Boulder: 50.6% <br>Engage Boulder: 37.5%<br>Unaligned: 11.8%',color:'#cc0024',icon:'',scale:0.56});
+				GV_Draw_Marker({lat:39.9861300,lon:-105.2645350,name:'',desc:'<b>Precinct 868—PLAN vs. Engage 59.3%</b><BR>Total ballots: 599<br>PLAN Boulder: 49.6% <br>Engage Boulder: 34%<br>Unaligned: 16.4%',color:'#cc0000',icon:'',scale:0.787});
+				GV_Draw_Marker({lat:39.9949650,lon:-105.2652000,name:'',desc:'<b>Precinct 869—PLAN vs. Engage 52.9%</b><BR>Total ballots: 334<br>PLAN Boulder: 45.5% <br>Engage Boulder: 40.5%<br>Unaligned: 14.1%',color:'#cc008a',icon:'',scale:0.527});
+				GV_Draw_Marker({lat:39.9920620,lon:-105.2483860,name:'',desc:'<b>Precinct 870—PLAN vs. Engage 60.8%</b><BR>Total ballots: 258<br>PLAN Boulder: 53.1% <br>Engage Boulder: 34.3%<br>Unaligned: 12.6%',color:'#cc0000',icon:'',scale:0.452});
+				GV_Draw_Marker({lat:39.9962780,lon:-105.2575390,name:'',desc:'<b>Precinct 871—PLAN vs. Engage 62.1%</b><BR>Total ballots: 377<br>PLAN Boulder: 55.6% <br>Engage Boulder: 34%<br>Unaligned: 10.5%',color:'#cc0000',icon:'',scale:0.569});
+				GV_Draw_Marker({lat:40.0020690,lon:-105.2697960,name:'',desc:'<b>Precinct 872—PLAN vs. Engage 56%</b><BR>Total ballots: 155<br>PLAN Boulder: 46.4% <br>Engage Boulder: 36.4%<br>Unaligned: 17.2%',color:'#cc0044',icon:'',scale:0.351});
+				GV_Draw_Marker({lat:39.9978530,lon:-105.2774970,name:'',desc:'<b>Precinct 873—PLAN vs. Engage 53.1%</b><BR>Total ballots: 296<br>PLAN Boulder: 46.3% <br>Engage Boulder: 40.9%<br>Unaligned: 12.9%',color:'#cc0086',icon:'',scale:0.49});
+				GV_Draw_Marker({lat:40.0018530,lon:-105.2820540,name:'',desc:'<b>Precinct 874—PLAN vs. Engage 48.2%</b><BR>Total ballots: 548<br>PLAN Boulder: 41.9% <br>Engage Boulder: 45%<br>Unaligned: 13.1%',color:'#a400cc',icon:'',scale:0.737});
+				GV_Draw_Marker({lat:40.0045460,lon:-105.2737360,name:'',desc:'<b>Precinct 875—PLAN vs. Engage 63.5%</b><BR>Total ballots: 109<br>PLAN Boulder: 56.1% <br>Engage Boulder: 32.2%<br>Unaligned: 11.7%',color:'#cc0000',icon:'',scale:0.306});
+				GV_Draw_Marker({lat:40.0072870,lon:-105.2790840,name:'',desc:'<b>Precinct 876—PLAN vs. Engage 48.2%</b><BR>Total ballots: 52<br>PLAN Boulder: 41.5% <br>Engage Boulder: 44.6%<br>Unaligned: 14.%',color:'#a400cc',icon:'',scale:0.25});
+				GV_Draw_Marker({lat:40.0053480,lon:-105.2845770,name:'',desc:'<b>Precinct 877—PLAN vs. Engage 51%</b><BR>Total ballots: 337<br>PLAN Boulder: 43.9% <br>Engage Boulder: 42.2%<br>Unaligned: 13.9%',color:'#cc00b6',icon:'',scale:0.53});
+				GV_Draw_Marker({lat:40.0096540,lon:-105.2856070,name:'',desc:'<b>Precinct 878—PLAN vs. Engage 59.8%</b><BR>Total ballots: 227<br>PLAN Boulder: 52.3% <br>Engage Boulder: 35.2%<br>Unaligned: 12.5%',color:'#cc0000',icon:'',scale:0.422});
+				GV_Draw_Marker({lat:40.0120530,lon:-105.2856500,name:'',desc:'<b>Precinct 879—PLAN vs. Engage 57.3%</b><BR>Total ballots: 232<br>PLAN Boulder: 51.2% <br>Engage Boulder: 38.2%<br>Unaligned: 10.5%',color:'#cc0026',icon:'',scale:0.427});
+				GV_Draw_Marker({lat:40.0119870,lon:-105.2794700,name:'',desc:'<b>Precinct 880—PLAN vs. Engage 54.6%</b><BR>Total ballots: 114<br>PLAN Boulder: 46.9% <br>Engage Boulder: 39%<br>Unaligned: 14.1%',color:'#cc0064',icon:'',scale:0.311});
+				GV_Draw_Marker({lat:40.0151430,lon:-105.2875810,name:'',desc:'<b>Precinct 881—PLAN vs. Engage 55.3%</b><BR>Total ballots: 305<br>PLAN Boulder: 48.4% <br>Engage Boulder: 39.1%<br>Unaligned: 12.5%',color:'#cc0054',icon:'',scale:0.498});
+				GV_Draw_Marker({lat:40.0184300,lon:-105.2885680,name:'',desc:'<b>Precinct 882—PLAN vs. Engage 54.4%</b><BR>Total ballots: 387<br>PLAN Boulder: 48.4% <br>Engage Boulder: 40.5%<br>Unaligned: 11.1%',color:'#cc0069',icon:'',scale:0.579});
+				GV_Draw_Marker({lat:40.0218480,lon:-105.2900270,name:'',desc:'<b>Precinct 883—PLAN vs. Engage 55.9%</b><BR>Total ballots: 432<br>PLAN Boulder: 50.9% <br>Engage Boulder: 40.2%<br>Unaligned: 8.9%',color:'#cc0046',icon:'',scale:0.623});
+				GV_Draw_Marker({lat:40.0202700,lon:-105.2826890,name:'',desc:'<b>Precinct 884—PLAN vs. Engage 48.4%</b><BR>Total ballots: 371<br>PLAN Boulder: 42.3% <br>Engage Boulder: 45.1%<br>Unaligned: 12.7%',color:'#a800cc',icon:'',scale:0.563});
+				GV_Draw_Marker({lat:40.0268760,lon:-105.2873660,name:'',desc:'<b>Precinct 885—PLAN vs. Engage 50.1%</b><BR>Total ballots: 318<br>PLAN Boulder: 44% <br>Engage Boulder: 43.8%<br>Unaligned: 12.2%',color:'#cc00ca',icon:'',scale:0.511});
+				GV_Draw_Marker({lat:40.0309830,lon:-105.2879240,name:'',desc:'<b>Precinct 886—PLAN vs. Engage 46.2%</b><BR>Total ballots: 469<br>PLAN Boulder: 41% <br>Engage Boulder: 47.8%<br>Unaligned: 11.2%',color:'#7600cc',icon:'',scale:0.659});
+				GV_Draw_Marker({lat:40.0358790,lon:-105.2874950,name:'',desc:'<b>Precinct 887—PLAN vs. Engage 54.5%</b><BR>Total ballots: 611<br>PLAN Boulder: 48.1% <br>Engage Boulder: 40.2%<br>Unaligned: 11.6%',color:'#cc0066',icon:'',scale:0.799});
+				GV_Draw_Marker({lat:40.0446850,lon:-105.2879670,name:'',desc:'<b>Precinct 888—PLAN vs. Engage 50.8%</b><BR>Total ballots: 529<br>PLAN Boulder: 43.6% <br>Engage Boulder: 42.2%<br>Unaligned: 14.2%',color:'#cc00ba',icon:'',scale:0.718});
+				
+				GV_Finish_Map();
+					
+			  
+			}
+			GV_Map(); // execute the above code
+			// http://www.gpsvisualizer.com/map_input?bg_opacity=100&colorize_gray=0&colorize_max=59&colorize_min=41&form=data&hue1=240&hue2=0&special=data&synthesize_desc=%3Cb%3E%7Bdesc%7D%E2%80%94PLAN%20vs.%20Engage%20%7BPLANvsEngagePercent%7D%25%3C%2Fb%3E%3CBR%3ETotal%20ballots%3A%20%7Bn%7D%3Cbr%3EPLAN%20Boulder%3A%20%7BPBPercent%7D%25%20%3Cbr%3EEngage%20Boulder%3A%20%7BEBPercent%7D%25%3Cbr%3EUnaligned%3A%20%7BUPercent%7D%25&units=us&wpt_colorize=custom&wpt_colorize_custom=PLANvsEngagePercent&wpt_max_size=32&wpt_min_size=8&wpt_resize=custom&wpt_resize_custom=n
+		</script>
+		
+		
+		
+	</body>
+
+</html>

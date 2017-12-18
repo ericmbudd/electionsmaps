@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Measure 2L (Boulder Electric Utility)</title>
+		<base target="_top"></base>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta name="geo.position" content="40.0215685; -105.2384615" />
+		<meta name="ICBM" content="40.0215685, -105.2384615" />
+	</head>
+	<body style="margin:0px;">
+		<script type="text/javascript">
+			google_api_key = ''; // Your project's Google Maps API key goes here (https://code.google.com/apis/console)
+			language_code = '';
+			document.writeln('<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;libraries=geometry&amp;language='+(self.language_code?self.language_code:'')+'&amp;key='+(self.google_api_key?self.google_api_key:'')+'"><'+'/script>');
+			
+			thunderforest_api_key = ''; // To display OpenStreetMap tiles from ThunderForest, you need a key (http://www.thunderforest.com/docs/apikeys/)
+		</script>
+		
+		<!--
+			If you want to transplant this map into another Web page, by far the best method is to
+			simply include it in a IFRAME tag (see http://www.gpsvisualizer.com/faq.html#google_html).
+			But, if you must paste the code into another page, be sure to include all of these parts:
+			   1. The "div" tags that contain the map and its widgets, below
+			   2. Three sections of JavaScript code:
+			      a. The Google code (maps.google.com or googleapis.com) code, above
+			      b. "gv_options" and the code that calls a .js file on maps.gpsvisualizer.com
+			      c. The "GV_Map" function, which contains all the geographic info for the map
+		-->
+		<div style="margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px;">
+			<div id="gmap_div" style="width:700px; height:700px; margin:0px; margin-right:12px; background-color:#f0f0f0; float:left; overflow:hidden;">
+				<p align="center" style="font:10px Arial;">This map was created using <a target="_blank" href="http://www.gpsvisualizer.com/">GPS Visualizer</a>'s do-it-yourself geographic utilities.<br /><br />Please wait while the map data loads...</p>
+			</div>
+				
+			<div id="gv_infobox" class="gv_infobox" style="font:11px Arial; border:solid #666666 1px; background-color:#ffffff; padding:4px; overflow:auto; display:none; ">
+				<div id="gv_legend_header" style="padding-bottom:2px;"><b>ForTheMeasure</b></div>
+				<div class="gv_legend_item"><span style="color:#a0061f;">&#9608; 70</span></div>
+				<div class="gv_legend_item"><span style="color:#df8e96;">&#9608; 60</span></div>
+				<div class="gv_legend_item"><span style="color:#ffffff;">&#9608; 50</span></div>
+				<div class="gv_legend_item"><span style="color:#8dafd8;">&#9608; 40</span></div>
+				<div class="gv_legend_item"><span style="color:#0d3f93;">&#9608; 30</span></div>
+			</div>
+
+
+
+			<div id="gv_marker_list" class="gv_marker_list" style="background-color:#ffffff; overflow:auto; display:none;"><!-- --></div>
+
+			<div id="gv_clear_margins" style="height:0px; clear:both;"><!-- clear the "float" --></div>
+		</div>
+
+		
+		<!-- begin GPS Visualizer setup script (must come after maps.google.com code) -->
+		<script type="text/javascript">
+			/* Global variables used by the GPS Visualizer functions (20171217214440): */
+			gv_options = {};
+			
+			// basic map parameters:
+			gv_options.center = [40.0215685,-105.2384615];  // [latitude,longitude] - be sure to keep the square brackets
+			gv_options.zoom = 12;  // higher number means closer view; can also be 'auto' for automatic zoom/center based on map elements
+			gv_options.map_type = 'GV_HYBRID';  // popular map_type choices are 'GV_STREET', 'GV_SATELLITE', 'GV_HYBRID', 'GV_TERRAIN', 'GV_OSM', 'GV_TOPO_US', 'GV_TOPO_WORLD' (http://www.gpsvisualizer.com/misc/google_map_types.html)
+			gv_options.map_opacity = 1.00;  // number from 0 to 1
+			gv_options.full_screen = true;  // true|false: should the map fill the entire page (or frame)?
+			gv_options.width = 700;  // width of the map, in pixels
+			gv_options.height = 700;  // height of the map, in pixels
+			
+			gv_options.map_div = 'gmap_div';  // the name of the HTML "div" tag containing the map itself; usually 'gmap_div'
+			gv_options.doubleclick_zoom = true;  // true|false: zoom in when mouse is double-clicked?
+			gv_options.doubleclick_center = true;  // true|false: re-center the map on the point that was double-clicked?
+			gv_options.scroll_zoom = true; // true|false; or 'reverse' for down=in and up=out
+			gv_options.page_scrolling = true; // true|false; does the map relenquish control of the scroll wheel when embedded in scrollable pages?
+			gv_options.autozoom_adjustment = 0;
+			gv_options.centering_options = { 'open_info_window':true, 'partial_match':true, 'center_key':'center', 'default_zoom':null } // URL-based centering (e.g., ?center=name_of_marker&zoom=14)
+			gv_options.street_view = false; // true|false: allow Google Street View on the map
+			gv_options.tilt = false; // true|false: allow Google to show 45-degree tilted aerial imagery?
+			gv_options.animated_zoom = false; // true|false: may or may not work properly
+			gv_options.disable_google_pois = false;  // true|false: if you disable clickable POIs, you also lose the labels on parks, airports, etc.
+			
+			// widgets on the map:
+			gv_options.zoom_control = 'large'; // 'large'|'small'|'none'
+			gv_options.recenter_button = true; // true|false: is there a 'click to recenter' option in the zoom control?
+			gv_options.scale_control = true; // true|false
+			gv_options.map_opacity_control = false;  // true|false: does it appear on the map itself?
+			gv_options.map_type_control = {};  // widget to change the background map
+			  gv_options.map_type_control.visible = true;  // true|false: does it appear on the map itself?
+			  gv_options.map_type_control.filter = false;  // true|false: when map loads, are irrelevant maps ignored?
+			  gv_options.map_type_control.excluded = [];  // comma-separated list of quoted map IDs that will never show in the list ('included' also works)
+			gv_options.center_coordinates = true;  // true|false: show a "center coordinates" box and crosshair?
+			gv_options.measurement_tools = true;  // true|false: does it appear on the map itself?
+			gv_options.measurement_options = { visible:false, distance_color:'', area_color:'' };
+			gv_options.crosshair_hidden = true;  // true|false: hide the crosshair initially?
+			gv_options.mouse_coordinates = false;  // true|false: show a "mouse coordinates" box?
+			gv_options.utilities_menu = { 'maptype':true, 'opacity':true, 'measure':true, 'export':true };
+			gv_options.allow_export = false;  // true|false
+			
+			gv_options.infobox_options = {}; // options for a floating info box (id="gv_infobox"), which can contain anything
+			  gv_options.infobox_options.enabled = true;  // true|false: enable or disable the info box altogether
+			  gv_options.infobox_options.position = ['LEFT_BOTTOM',3,50];  // [Google anchor name, relative x, relative y]
+			  gv_options.infobox_options.draggable = true;  // true|false: can it be moved around the screen?
+			  gv_options.infobox_options.collapsible = true;  // true|false: can it be collapsed by double-clicking its top bar?
+
+			// marker-related options:
+			gv_options.default_marker = { color:'red',icon:'blankcircle',scale:1,opacity:0.7 }; // icon can be a URL, but be sure to also include size:[w,h] and optionally anchor:[x,y]
+			gv_options.vector_markers = false; // are the icons on the map in embedded SVG format?
+			gv_options.marker_tooltips = true; // do the names of the markers show up when you mouse-over them?
+			gv_options.marker_shadows = true; // true|false: do the standard markers have "shadows" behind them?
+			gv_options.marker_link_target = '_blank'; // the name of the window or frame into which markers' URLs will load
+			gv_options.info_window_width = 300;  // in pixels, the width of the markers' pop-up info "bubbles" (can be overridden by 'window_width' in individual markers)
+			gv_options.thumbnail_width = 0;  // in pixels, the width of the markers' thumbnails (can be overridden by 'thumbnail_width' in individual markers)
+			gv_options.photo_size = [0,0];  // in pixels, the size of the photos in info windows (can be overridden by 'photo_width' or 'photo_size' in individual markers)
+			gv_options.hide_labels = false;  // true|false: hide labels when map first loads?
+			gv_options.labels_behind_markers = false; // true|false: are the labels behind other markers (true) or in front of them (false)?
+			gv_options.label_offset = [0,0];  // [x,y]: shift all markers' labels (positive numbers are right and down)
+			gv_options.label_centered = false;  // true|false: center labels with respect to their markers?  (label_left is also a valid option.)
+			gv_options.driving_directions = false;  // put a small "driving directions" form in each marker's pop-up window? (override with dd:true or dd:false in a marker's options)
+			gv_options.garmin_icon_set = 'gpsmap'; // 'gpsmap' are the small 16x16 icons; change it to '24x24' for larger icons
+			gv_options.marker_list_options = {};  // options for a dynamically-created list of markers
+			  gv_options.marker_list_options.enabled = false;  // true|false: enable or disable the marker list altogether
+			  gv_options.marker_list_options.floating = true;  // is the list a floating box inside the map itself?
+			  gv_options.marker_list_options.position = ['RIGHT_BOTTOM',6,38];  // floating list only: position within map
+			  gv_options.marker_list_options.min_width = 160; // minimum width, in pixels, of the floating list
+			  gv_options.marker_list_options.max_width = 160;  // maximum width
+			  gv_options.marker_list_options.min_height = 0;  // minimum height, in pixels, of the floating list
+			  gv_options.marker_list_options.max_height = 310;  // maximum height
+			  gv_options.marker_list_options.draggable = true;  // true|false, floating list only: can it be moved around the screen?
+			  gv_options.marker_list_options.collapsible = true;  // true|false, floating list only: can it be collapsed by double-clicking its top bar?
+			  gv_options.marker_list_options.include_tickmarks = false;  // true|false: are distance/time tickmarks included in the list?
+			  gv_options.marker_list_options.include_trackpoints = false;  // true|false: are "trackpoint" markers included in the list?
+			  gv_options.marker_list_options.dividers = false;  // true|false: will a thin line be drawn between each item in the list?
+			  gv_options.marker_list_options.desc = false;  // true|false: will the markers' descriptions be shown below their names in the list?
+			  gv_options.marker_list_options.icons = true;  // true|false: should the markers' icons appear to the left of their names in the list?
+			  gv_options.marker_list_options.thumbnails = false;  // true|false: should markers' thumbnails be shown in the list?
+			  gv_options.marker_list_options.folders_collapsed = false;  // true|false: do folders in the list start out in a collapsed state?
+			  gv_options.marker_list_options.folders_hidden = false;  // true|false: do folders in the list start out in a hidden state?
+			  gv_options.marker_list_options.collapsed_folders = []; // an array of folder names
+			  gv_options.marker_list_options.hidden_folders = []; // an array of folder names
+			  gv_options.marker_list_options.count_folder_items = false;  // true|false: list the number of items in each folder?
+			  gv_options.marker_list_options.wrap_names = true;  // true|false: should marker's names be allowed to wrap onto more than one line?
+			  gv_options.marker_list_options.unnamed = '[unnamed]';  // what 'name' should be assigned to  unnamed markers in the list?
+			  gv_options.marker_list_options.colors = false;  // true|false: should the names/descs of the points in the list be colorized the same as their markers?
+			  gv_options.marker_list_options.default_color = '';  // default HTML color code for the names/descs in the list
+			  gv_options.marker_list_options.limit = 0;  // how many markers to show in the list; 0 for no limit
+			  gv_options.marker_list_options.center = false;  // true|false: does the map center upon a marker when you click its name in the list?
+			  gv_options.marker_list_options.zoom = false;  // true|false: does the map zoom to a certain level when you click on a marker's name in the list?
+			  gv_options.marker_list_options.zoom_level = 15;  // if 'zoom' is true, what level should the map zoom to?
+			  gv_options.marker_list_options.info_window = true;  // true|false: do info windows pop up when the markers' names are clicked in the list?
+			  gv_options.marker_list_options.url_links = false;  // true|false: do the names in the list become instant links to the markers' URLs?
+			  gv_options.marker_list_options.toggle = false;  // true|false: does a marker disappear if you click on its name in the list?
+			  gv_options.marker_list_options.help_tooltips = false;  // true|false: do "tooltips" appear on marker names that tell you what happens when you click?
+			  gv_options.marker_list_options.id = 'gv_marker_list';  // id of a DIV tag that holds the list
+			  gv_options.marker_list_options.header = ''; // HTML code; be sure to put backslashes in front of any single quotes, and don't include any line breaks
+			  gv_options.marker_list_options.footer = ''; // HTML code
+			gv_options.marker_filter_options = {};  // options for removing waypoints that are out of the current view
+			  gv_options.marker_filter_options.enabled = false;  // true|false: should out-of-range markers be removed?
+			  gv_options.marker_filter_options.movement_threshold = 8;  // in pixels, how far the map has to move to trigger filtering
+			  gv_options.marker_filter_options.limit = 0;  // maximum number of markers to display on the map; 0 for no limit
+			  gv_options.marker_filter_options.update_list = true;  // true|false: should the marker list be updated with only the filtered markers?
+			  gv_options.marker_filter_options.sort_list_by_distance = false;  // true|false: should the marker list be sorted by distance from the center of the map?
+			  gv_options.marker_filter_options.min_zoom = 0;  // below this zoom level, don't show any markers at all
+			  gv_options.marker_filter_options.zoom_message = '';  // message to put in the marker list if the map is below the min_zoom threshold
+			gv_options.synthesize_fields = {}; // for example: {label:'{name}'} would cause all markers' names to become visible labels
+				
+
+			
+			// Load GPS Visualizer's Google Maps functions (this must be loaded AFTER gv_options are set):
+			if (window.location.toString().indexOf('https://') == 0) { // secure pages require secure scripts
+				document.writeln('<script src="https://gpsvisualizer.com/google_maps/functions3.js" type="text/javascript"><'+'/script>');
+			} else {
+				document.writeln('<script src="http://maps.gpsvisualizer.com/google_maps/functions3.js" type="text/javascript"><'+'/script>');
+			}
+			
+		</script>
+		<style type="text/css">
+			/* Put any custom style definitions here (e.g., .gv_marker_info_window, .gv_marker_info_window_name, .gv_marker_list_item, .gv_tooltip, .gv_label, etc.) */
+			#gmap_div .gv_marker_info_window {
+				font-size:11px !important;
+			}
+			#gmap_div .gv_label {
+				opacity:0.80; filter:alpha(opacity=80);
+				color:white; background-color:#333333; border:1px solid black; padding:1px;
+				font:9px Verdana !important;
+				font-weight:normal !important;
+			}
+			
+		</style>
+		
+		<!-- end GPSV setup script and styles; begin map-drawing script (they must be separate) -->
+		<script type="text/javascript">
+			function GV_Map() {
+			  
+				GV_Setup_Map();
+				
+				
+				
+				GV_Draw_Marker({lat:40.0712570,lon:-105.1868960,name:'',desc:'<b>Precinct 800—Municipal Electric Utility (2L)</b><br>Total votes: 225<br>Turnout: 53.9%<br>—<br>For The Measure: 28%<br>Against The Measure: 72%</b>',color:'#0d3f93',icon:'',scale:0.374});
+				GV_Draw_Marker({lat:40.0755910,lon:-105.1949210,name:'',desc:'<b>Precinct 801—Municipal Electric Utility (2L)</b><br>Total votes: 205<br>Turnout: 32.7%<br>—<br>For The Measure: 42.9%<br>Against The Measure: 57.1%</b>',color:'#b9d4ed',icon:'',scale:0.356});
+				GV_Draw_Marker({lat:40.0666260,lon:-105.2012290,name:'',desc:'<b>Precinct 802—Municipal Electric Utility (2L)</b><br>Total votes: 136<br>Turnout: 31.7%<br>—<br>For The Measure: 58.1%<br>Against The Measure: 41.9%</b>',color:'#ecadb0',icon:'',scale:0.294});
+				GV_Draw_Marker({lat:40.0605500,lon:-105.2199830,name:'',desc:'<b>Precinct 804—Municipal Electric Utility (2L)</b><br>Total votes: 199<br>Turnout: 55.4%<br>—<br>For The Measure: 44.2%<br>Against The Measure: 55.8%</b>',color:'#cbe2f5',icon:'',scale:0.351});
+				GV_Draw_Marker({lat:40.0655460,lon:-105.2860460,name:'',desc:'<b>Precinct 806—Municipal Electric Utility (2L)</b><br>Total votes: 567<br>Turnout: 48.2%<br>—<br>For The Measure: 43.2%<br>Against The Measure: 56.8%</b>',color:'#bdd8ef',icon:'',scale:0.678});
+				GV_Draw_Marker({lat:40.0531260,lon:-105.2867170,name:'',desc:'<b>Precinct 807—Municipal Electric Utility (2L)</b><br>Total votes: 631<br>Turnout: 58.5%<br>—<br>For The Measure: 53.6%<br>Against The Measure: 46.4%</b>',color:'#ffe9e8',icon:'',scale:0.735});
+				GV_Draw_Marker({lat:40.0570020,lon:-105.2771040,name:'',desc:'<b>Precinct 808—Municipal Electric Utility (2L)</b><br>Total votes: 788<br>Turnout: 41.3%<br>—<br>For The Measure: 58.9%<br>Against The Measure: 41.1%</b>',color:'#e6a0a5',icon:'',scale:0.875});
+				GV_Draw_Marker({lat:40.0476070,lon:-105.2772750,name:'',desc:'<b>Precinct 809—Municipal Electric Utility (2L)</b><br>Total votes: 584<br>Turnout: 59.4%<br>—<br>For The Measure: 50.5%<br>Against The Measure: 49.5%</b>',color:'#fffefd',icon:'',scale:0.693});
+				GV_Draw_Marker({lat:40.0507610,lon:-105.2683490,name:'',desc:'<b>Precinct 810—Municipal Electric Utility (2L)</b><br>Total votes: 486<br>Turnout: 55.2%<br>—<br>For The Measure: 51.2%<br>Against The Measure: 48.8%</b>',color:'#fffbfa',icon:'',scale:0.606});
+				GV_Draw_Marker({lat:40.0496860,lon:-105.2509650,name:'',desc:'<b>Precinct 811—Municipal Electric Utility (2L)</b><br>Total votes: 386<br>Turnout: 52.3%<br>—<br>For The Measure: 42.2%<br>Against The Measure: 57.8%</b>',color:'#aecce8',icon:'',scale:0.517});
+				GV_Draw_Marker({lat:40.0430500,lon:-105.2512660,name:'',desc:'<b>Precinct 812—Municipal Electric Utility (2L)</b><br>Total votes: 327<br>Turnout: 48.4%<br>—<br>For The Measure: 51.4%<br>Against The Measure: 48.6%</b>',color:'#fffaf9',icon:'',scale:0.465});
+				GV_Draw_Marker({lat:40.0350910,lon:-105.2262120,name:'',desc:'<b>Precinct 813—Municipal Electric Utility (2L)</b><br>Total votes: 159<br>Turnout: 39.7%<br>—<br>For The Measure: 63.5%<br>Against The Measure: 36.5%</b>',color:'#c45463',icon:'',scale:0.315});
+				GV_Draw_Marker({lat:40.0328640,lon:-105.2411800,name:'',desc:'<b>Precinct 814—Municipal Electric Utility (2L)</b><br>Total votes: 537<br>Turnout: 51.1%<br>—<br>For The Measure: 54.2%<br>Against The Measure: 45.8%</b>',color:'#ffe3e1',icon:'',scale:0.652});
+				GV_Draw_Marker({lat:40.0377930,lon:-105.2489050,name:'',desc:'<b>Precinct 815—Municipal Electric Utility (2L)</b><br>Total votes: 284<br>Turnout: 34.7%<br>—<br>For The Measure: 68.3%<br>Against The Measure: 31.7%</b>',color:'#a6132b',icon:'',scale:0.426});
+				GV_Draw_Marker({lat:40.0413090,lon:-105.2607930,name:'',desc:'<b>Precinct 816—Municipal Electric Utility (2L)</b><br>Total votes: 474<br>Turnout: 44%<br>—<br>For The Measure: 48.7%<br>Against The Measure: 51.3%</b>',color:'#f9ffff',icon:'',scale:0.595});
+				GV_Draw_Marker({lat:40.0411110,lon:-105.2678310,name:'',desc:'<b>Precinct 817—Municipal Electric Utility (2L)</b><br>Total votes: 510<br>Turnout: 63.8%<br>—<br>For The Measure: 40.2%<br>Against The Measure: 59.8%</b>',color:'#8fb2d9',icon:'',scale:0.627});
+				GV_Draw_Marker({lat:40.0409140,lon:-105.2773580,name:'',desc:'<b>Precinct 818—Municipal Electric Utility (2L)</b><br>Total votes: 576<br>Turnout: 57.3%<br>—<br>For The Measure: 46%<br>Against The Measure: 54%</b>',color:'#e1f2fd',icon:'',scale:0.686});
+				GV_Draw_Marker({lat:40.0329300,lon:-105.2774870,name:'',desc:'<b>Precinct 819—Municipal Electric Utility (2L)</b><br>Total votes: 483<br>Turnout: 55.9%<br>—<br>For The Measure: 54.7%<br>Against The Measure: 45.3%</b>',color:'#fedddc',icon:'',scale:0.603});
+				GV_Draw_Marker({lat:40.0330610,lon:-105.2699340,name:'',desc:'<b>Precinct 820—Municipal Electric Utility (2L)</b><br>Total votes: 396<br>Turnout: 59.5%<br>—<br>For The Measure: 50.3%<br>Against The Measure: 49.7%</b>',color:'#fffefe',icon:'',scale:0.526});
+				GV_Draw_Marker({lat:40.0324700,lon:-105.2632390,name:'',desc:'<b>Precinct 821—Municipal Electric Utility (2L)</b><br>Total votes: 479<br>Turnout: 45.7%<br>—<br>For The Measure: 61.4%<br>Against The Measure: 38.6%</b>',color:'#d47681',icon:'',scale:0.6});
+				GV_Draw_Marker({lat:40.0347370,lon:-105.2512230,name:'',desc:'<b>Precinct 822—Municipal Electric Utility (2L)</b><br>Total votes: 289<br>Turnout: 31.1%<br>—<br>For The Measure: 60.9%<br>Against The Measure: 39.1%</b>',color:'#d87f89',icon:'',scale:0.431});
+				GV_Draw_Marker({lat:40.0221790,lon:-105.2385680,name:'',desc:'<b>Precinct 823—Municipal Electric Utility (2L)</b><br>Total votes: 582<br>Turnout: 31.6%<br>—<br>For The Measure: 62.4%<br>Against The Measure: 37.6%</b>',color:'#cc6672',icon:'',scale:0.692});
+				GV_Draw_Marker({lat:40.0265240,lon:-105.2640500,name:'',desc:'<b>Precinct 824—Municipal Electric Utility (2L)</b><br>Total votes: 505<br>Turnout: 49.4%<br>—<br>For The Measure: 55.6%<br>Against The Measure: 44.4%</b>',color:'#fad2d2',icon:'',scale:0.623});
+				GV_Draw_Marker({lat:40.0279870,lon:-105.2767530,name:'',desc:'<b>Precinct 825—Municipal Electric Utility (2L)</b><br>Total votes: 357<br>Turnout: 58.6%<br>—<br>For The Measure: 52.9%<br>Against The Measure: 47.1%</b>',color:'#ffefee',icon:'',scale:0.491});
+				GV_Draw_Marker({lat:40.0238130,lon:-105.2769670,name:'',desc:'<b>Precinct 826—Municipal Electric Utility (2L)</b><br>Total votes: 447<br>Turnout: 55.8%<br>—<br>For The Measure: 56.2%<br>Against The Measure: 43.8%</b>',color:'#f7c9ca',icon:'',scale:0.571});
+				GV_Draw_Marker({lat:40.0208550,lon:-105.2712600,name:'',desc:'<b>Precinct 827—Municipal Electric Utility (2L)</b><br>Total votes: 374<br>Turnout: 42.6%<br>—<br>For The Measure: 61.2%<br>Against The Measure: 38.8%</b>',color:'#d57a84',icon:'',scale:0.506});
+				GV_Draw_Marker({lat:40.0224490,lon:-105.2630840,name:'',desc:'<b>Precinct 828—Municipal Electric Utility (2L)</b><br>Total votes: 261<br>Turnout: 37.9%<br>—<br>For The Measure: 62.5%<br>Against The Measure: 37.5%</b>',color:'#cb6471',icon:'',scale:0.406});
+				GV_Draw_Marker({lat:40.0190310,lon:-105.2631700,name:'',desc:'<b>Precinct 829—Municipal Electric Utility (2L)</b><br>Total votes: 243<br>Turnout: 31.4%<br>—<br>For The Measure: 64.2%<br>Against The Measure: 35.8%</b>',color:'#be4859',icon:'',scale:0.39});
+				GV_Draw_Marker({lat:40.0157770,lon:-105.2643720,name:'',desc:'<b>Precinct 830—Municipal Electric Utility (2L)</b><br>Total votes: 174<br>Turnout: 22.7%<br>—<br>For The Measure: 74.1%<br>Against The Measure: 25.9%</b>',color:'#a0061f',icon:'',scale:0.328});
+				GV_Draw_Marker({lat:40.0156460,lon:-105.2716460,name:'',desc:'<b>Precinct 831—Municipal Electric Utility (2L)</b><br>Total votes: 221<br>Turnout: 27.4%<br>—<br>For The Measure: 68.8%<br>Against The Measure: 31.2%</b>',color:'#a40f27',icon:'',scale:0.37});
+				GV_Draw_Marker({lat:40.0174370,lon:-105.2770750,name:'',desc:'<b>Precinct 832—Municipal Electric Utility (2L)</b><br>Total votes: 135<br>Turnout: 42.9%<br>—<br>For The Measure: 44.4%<br>Against The Measure: 55.6%</b>',color:'#cee5f6',icon:'',scale:0.294});
+				GV_Draw_Marker({lat:40.0117840,lon:-105.2701870,name:'',desc:'<b>Precinct 833—Municipal Electric Utility (2L)</b><br>Total votes: 139<br>Turnout: 17.8%<br>—<br>For The Measure: 71.9%<br>Against The Measure: 28.1%</b>',color:'#a0061f',icon:'',scale:0.297});
+				GV_Draw_Marker({lat:40.0056040,lon:-105.2663240,name:'',desc:'<b>Precinct 834—Municipal Electric Utility (2L)</b><br>Total votes: 139<br>Turnout: 9.9%<br>—<br>For The Measure: 88.5%<br>Against The Measure: 11.5%</b>',color:'#a0061f',icon:'',scale:0.297});
+				GV_Draw_Marker({lat:40.0039930,lon:-105.2613460,name:'',desc:'<b>Precinct 835—Municipal Electric Utility (2L)</b><br>Total votes: 127<br>Turnout: 17.9%<br>—<br>For The Measure: 89.8%<br>Against The Measure: 10.2%</b>',color:'#a0061f',icon:'',scale:0.286});
+				GV_Draw_Marker({lat:40.0121620,lon:-105.2584920,name:'',desc:'<b>Precinct 836—Municipal Electric Utility (2L)</b><br>Total votes: 187<br>Turnout: 36.7%<br>—<br>For The Measure: 42.8%<br>Against The Measure: 57.2%</b>',color:'#b7d3ed',icon:'',scale:0.34});
+				GV_Draw_Marker({lat:40.0093190,lon:-105.2557460,name:'',desc:'<b>Precinct 837—Municipal Electric Utility (2L)</b><br>Total votes: 205<br>Turnout: 22.6%<br>—<br>For The Measure: 76.6%<br>Against The Measure: 23.4%</b>',color:'#a0061f',icon:'',scale:0.356});
+				GV_Draw_Marker({lat:40.0105180,lon:-105.2469690,name:'',desc:'<b>Precinct 838—Municipal Electric Utility (2L)</b><br>Total votes: 103<br>Turnout: 22.7%<br>—<br>For The Measure: 75.7%<br>Against The Measure: 24.3%</b>',color:'#a0061f',icon:'',scale:0.265});
+				GV_Draw_Marker({lat:40.0112420,lon:-105.2375610,name:'',desc:'<b>Precinct 839—Municipal Electric Utility (2L)</b><br>Total votes: 372<br>Turnout: 60.8%<br>—<br>For The Measure: 41.7%<br>Against The Measure: 58.3%</b>',color:'#a7c6e5',icon:'',scale:0.505});
+				GV_Draw_Marker({lat:40.0101150,lon:-105.2326620,name:'',desc:'<b>Precinct 840—Municipal Electric Utility (2L)</b><br>Total votes: 287<br>Turnout: 50.1%<br>—<br>For The Measure: 38%<br>Against The Measure: 62%</b>',color:'#6d94c7',icon:'',scale:0.429});
+				GV_Draw_Marker({lat:40.0111800,lon:-105.2279240,name:'',desc:'<b>Precinct 841—Municipal Electric Utility (2L)</b><br>Total votes: 338<br>Turnout: 53%<br>—<br>For The Measure: 29.3%<br>Against The Measure: 70.7%</b>',color:'#0d3f93',icon:'',scale:0.474});
+				GV_Draw_Marker({lat:40.0001080,lon:-105.2189330,name:'',desc:'<b>Precinct 842—Municipal Electric Utility (2L)</b><br>Total votes: 598<br>Turnout: 61.5%<br>—<br>For The Measure: 44.3%<br>Against The Measure: 55.7%</b>',color:'#cce3f5',icon:'',scale:0.706});
+				GV_Draw_Marker({lat:40.0018220,lon:-105.2300810,name:'',desc:'<b>Precinct 843—Municipal Electric Utility (2L)</b><br>Total votes: 729<br>Turnout: 61.2%<br>—<br>For The Measure: 43.5%<br>Against The Measure: 56.5%</b>',color:'#c1dbf1',icon:'',scale:0.822});
+				GV_Draw_Marker({lat:40.0030730,lon:-105.2386090,name:'',desc:'<b>Precinct 844—Municipal Electric Utility (2L)</b><br>Total votes: 347<br>Turnout: 47.8%<br>—<br>For The Measure: 54.2%<br>Against The Measure: 45.8%</b>',color:'#ffe3e1',icon:'',scale:0.482});
+				GV_Draw_Marker({lat:40.0057290,lon:-105.2450600,name:'',desc:'<b>Precinct 845—Municipal Electric Utility (2L)</b><br>Total votes: 326<br>Turnout: 39.4%<br>—<br>For The Measure: 62%<br>Against The Measure: 38%</b>',color:'#cf6c78',icon:'',scale:0.464});
+				GV_Draw_Marker({lat:40.0051730,lon:-105.2564300,name:'',desc:'<b>Precinct 846—Municipal Electric Utility (2L)</b><br>Total votes: 307<br>Turnout: 24.5%<br>—<br>For The Measure: 66.1%<br>Against The Measure: 33.9%</b>',color:'#b22d41',icon:'',scale:0.447});
+				GV_Draw_Marker({lat:40.0021000,lon:-105.2559060,name:'',desc:'<b>Precinct 847—Municipal Electric Utility (2L)</b><br>Total votes: 132<br>Turnout: 18%<br>—<br>For The Measure: 75.8%<br>Against The Measure: 24.2%</b>',color:'#a0061f',icon:'',scale:0.291});
+				GV_Draw_Marker({lat:40.0021930,lon:-105.2483260,name:'',desc:'<b>Precinct 848—Municipal Electric Utility (2L)</b><br>Total votes: 239<br>Turnout: 37.9%<br>—<br>For The Measure: 62.8%<br>Against The Measure: 37.2%</b>',color:'#c95f6d',icon:'',scale:0.386});
+				GV_Draw_Marker({lat:39.9980390,lon:-105.2507450,name:'',desc:'<b>Precinct 849—Municipal Electric Utility (2L)</b><br>Total votes: 99<br>Turnout: 9.3%<br>—<br>For The Measure: 86.9%<br>Against The Measure: 13.1%</b>',color:'#a0061f',icon:'',scale:0.261});
+				GV_Draw_Marker({lat:39.9962320,lon:-105.2414720,name:'',desc:'<b>Precinct 850—Municipal Electric Utility (2L)</b><br>Total votes: 420<br>Turnout: 64.2%<br>—<br>For The Measure: 30.2%<br>Against The Measure: 69.8%</b>',color:'#0e4093',icon:'',scale:0.547});
+				GV_Draw_Marker({lat:39.9968490,lon:-105.2343750,name:'',desc:'<b>Precinct 851—Municipal Electric Utility (2L)</b><br>Total votes: 523<br>Turnout: 55.5%<br>—<br>For The Measure: 46.3%<br>Against The Measure: 53.7%</b>',color:'#e4f4fe',icon:'',scale:0.639});
+				GV_Draw_Marker({lat:39.9880460,lon:-105.2289520,name:'',desc:'<b>Precinct 852—Municipal Electric Utility (2L)</b><br>Total votes: 478<br>Turnout: 45.7%<br>—<br>For The Measure: 53.8%<br>Against The Measure: 46.2%</b>',color:'#ffe7e5',icon:'',scale:0.599});
+				GV_Draw_Marker({lat:39.9906100,lon:-105.2344160,name:'',desc:'<b>Precinct 853—Municipal Electric Utility (2L)</b><br>Total votes: 256<br>Turnout: 34.1%<br>—<br>For The Measure: 50%<br>Against The Measure: 50%</b>',color:'#ffffff',icon:'',scale:0.401});
+				GV_Draw_Marker({lat:39.9873200,lon:-105.2417130,name:'',desc:'<b>Precinct 854—Municipal Electric Utility (2L)</b><br>Total votes: 342<br>Turnout: 35.6%<br>—<br>For The Measure: 61.1%<br>Against The Measure: 38.9%</b>',color:'#d67b85',icon:'',scale:0.478});
+				GV_Draw_Marker({lat:39.9825160,lon:-105.2379640,name:'',desc:'<b>Precinct 855—Municipal Electric Utility (2L)</b><br>Total votes: 314<br>Turnout: 38.4%<br>—<br>For The Measure: 67.8%<br>Against The Measure: 32.2%</b>',color:'#a8182f',icon:'',scale:0.453});
+				GV_Draw_Marker({lat:39.9774490,lon:-105.2409070,name:'',desc:'<b>Precinct 856—Municipal Electric Utility (2L)</b><br>Total votes: 292<br>Turnout: 51.3%<br>—<br>For The Measure: 57.9%<br>Against The Measure: 42.1%</b>',color:'#edb0b4',icon:'',scale:0.433});
+				GV_Draw_Marker({lat:39.9733390,lon:-105.2471370,name:'',desc:'<b>Precinct 857—Municipal Electric Utility (2L)</b><br>Total votes: 458<br>Turnout: 53.8%<br>—<br>For The Measure: 44.5%<br>Against The Measure: 55.5%</b>',color:'#cfe5f7',icon:'',scale:0.581});
+				GV_Draw_Marker({lat:39.9675460,lon:-105.2518740,name:'',desc:'<b>Precinct 858—Municipal Electric Utility (2L)</b><br>Total votes: 526<br>Turnout: 58.9%<br>—<br>For The Measure: 54.6%<br>Against The Measure: 45.4%</b>',color:'#fededd',icon:'',scale:0.642});
+				GV_Draw_Marker({lat:39.9734630,lon:-105.2627200,name:'',desc:'<b>Precinct 859—Municipal Electric Utility (2L)</b><br>Total votes: 493<br>Turnout: 59.2%<br>—<br>For The Measure: 45.6%<br>Against The Measure: 54.4%</b>',color:'#dceffc',icon:'',scale:0.612});
+				GV_Draw_Marker({lat:39.9744830,lon:-105.2565310,name:'',desc:'<b>Precinct 860—Municipal Electric Utility (2L)</b><br>Total votes: 408<br>Turnout: 64.1%<br>—<br>For The Measure: 42.4%<br>Against The Measure: 57.6%</b>',color:'#b2cfea',icon:'',scale:0.537});
+				GV_Draw_Marker({lat:39.9778660,lon:-105.2462490,name:'',desc:'<b>Precinct 861—Municipal Electric Utility (2L)</b><br>Total votes: 341<br>Turnout: 56.6%<br>—<br>For The Measure: 46.6%<br>Against The Measure: 53.4%</b>',color:'#e7f6ff',icon:'',scale:0.477});
+				GV_Draw_Marker({lat:39.9768150,lon:-105.2543540,name:'',desc:'<b>Precinct 862—Municipal Electric Utility (2L)</b><br>Total votes: 375<br>Turnout: 57.1%<br>—<br>For The Measure: 52.8%<br>Against The Measure: 47.2%</b>',color:'#fff1ef',icon:'',scale:0.507});
+				GV_Draw_Marker({lat:39.9798430,lon:-105.2663490,name:'',desc:'<b>Precinct 863—Municipal Electric Utility (2L)</b><br>Total votes: 470<br>Turnout: 61.3%<br>—<br>For The Measure: 43.4%<br>Against The Measure: 56.6%</b>',color:'#c0daf0',icon:'',scale:0.592});
+				GV_Draw_Marker({lat:39.9810790,lon:-105.2515310,name:'',desc:'<b>Precinct 864—Municipal Electric Utility (2L)</b><br>Total votes: 401<br>Turnout: 63.4%<br>—<br>For The Measure: 48.9%<br>Against The Measure: 51.1%</b>',color:'#faffff',icon:'',scale:0.53});
+				GV_Draw_Marker({lat:39.9841380,lon:-105.2449390,name:'',desc:'<b>Precinct 865—Municipal Electric Utility (2L)</b><br>Total votes: 285<br>Turnout: 42.8%<br>—<br>For The Measure: 57.2%<br>Against The Measure: 42.8%</b>',color:'#f2bbbd',icon:'',scale:0.427});
+				GV_Draw_Marker({lat:39.9894360,lon:-105.2508860,name:'',desc:'<b>Precinct 866—Municipal Electric Utility (2L)</b><br>Total votes: 430<br>Turnout: 51.8%<br>—<br>For The Measure: 60.2%<br>Against The Measure: 39.8%</b>',color:'#dd8a92',icon:'',scale:0.556});
+				GV_Draw_Marker({lat:39.9858060,lon:-105.2544550,name:'',desc:'<b>Precinct 867—Municipal Electric Utility (2L)</b><br>Total votes: 360<br>Turnout: 45.3%<br>—<br>For The Measure: 55.%<br>Against The Measure: 45.%</b>',color:'#fdd9d9',icon:'',scale:0.494});
+				GV_Draw_Marker({lat:39.9861300,lon:-105.2645350,name:'',desc:'<b>Precinct 868—Municipal Electric Utility (2L)</b><br>Total votes: 571<br>Turnout: 67.8%<br>—<br>For The Measure: 40.1%<br>Against The Measure: 59.9%</b>',color:'#8eb1d8',icon:'',scale:0.682});
+				GV_Draw_Marker({lat:39.9949650,lon:-105.2652000,name:'',desc:'<b>Precinct 869—Municipal Electric Utility (2L)</b><br>Total votes: 319<br>Turnout: 55.9%<br>—<br>For The Measure: 48.6%<br>Against The Measure: 51.4%</b>',color:'#f8ffff',icon:'',scale:0.457});
+				GV_Draw_Marker({lat:39.9920620,lon:-105.2483860,name:'',desc:'<b>Precinct 870—Municipal Electric Utility (2L)</b><br>Total votes: 245<br>Turnout: 34.1%<br>—<br>For The Measure: 64.9%<br>Against The Measure: 35.1%</b>',color:'#ba3e50',icon:'',scale:0.391});
+				GV_Draw_Marker({lat:39.9962780,lon:-105.2575390,name:'',desc:'<b>Precinct 871—Municipal Electric Utility (2L)</b><br>Total votes: 367<br>Turnout: 47.3%<br>—<br>For The Measure: 60.2%<br>Against The Measure: 39.8%</b>',color:'#dd8a92',icon:'',scale:0.5});
+				GV_Draw_Marker({lat:40.0020690,lon:-105.2697960,name:'',desc:'<b>Precinct 872—Municipal Electric Utility (2L)</b><br>Total votes: 152<br>Turnout: 17.1%<br>—<br>For The Measure: 67.1%<br>Against The Measure: 32.9%</b>',color:'#ac2036',icon:'',scale:0.309});
+				GV_Draw_Marker({lat:39.9978530,lon:-105.2774970,name:'',desc:'<b>Precinct 873—Municipal Electric Utility (2L)</b><br>Total votes: 284<br>Turnout: 60.9%<br>—<br>For The Measure: 34.9%<br>Against The Measure: 65.1%</b>',color:'#3f6bae',icon:'',scale:0.426});
+				GV_Draw_Marker({lat:40.0018530,lon:-105.2820540,name:'',desc:'<b>Precinct 874—Municipal Electric Utility (2L)</b><br>Total votes: 530<br>Turnout: 51.7%<br>—<br>For The Measure: 33.4%<br>Against The Measure: 66.6%</b>',color:'#2c5aa3',icon:'',scale:0.645});
+				GV_Draw_Marker({lat:40.0045460,lon:-105.2737360,name:'',desc:'<b>Precinct 875—Municipal Electric Utility (2L)</b><br>Total votes: 106<br>Turnout: 16%<br>—<br>For The Measure: 60.4%<br>Against The Measure: 39.6%</b>',color:'#dc8790',icon:'',scale:0.268});
+				GV_Draw_Marker({lat:40.0072870,lon:-105.2790840,name:'',desc:'<b>Precinct 876—Municipal Electric Utility (2L)</b><br>Total votes: 51<br>Turnout: 6.8%<br>—<br>For The Measure: 66.7%<br>Against The Measure: 33.3%</b>',color:'#ae253b',icon:'',scale:0.219});
+				GV_Draw_Marker({lat:40.0053480,lon:-105.2845770,name:'',desc:'<b>Precinct 877—Municipal Electric Utility (2L)</b><br>Total votes: 326<br>Turnout: 46.6%<br>—<br>For The Measure: 42.3%<br>Against The Measure: 57.7%</b>',color:'#b0cde9',icon:'',scale:0.464});
+				GV_Draw_Marker({lat:40.0096540,lon:-105.2856070,name:'',desc:'<b>Precinct 878—Municipal Electric Utility (2L)</b><br>Total votes: 214<br>Turnout: 35%<br>—<br>For The Measure: 54.2%<br>Against The Measure: 45.8%</b>',color:'#ffe3e1',icon:'',scale:0.364});
+				GV_Draw_Marker({lat:40.0120530,lon:-105.2856500,name:'',desc:'<b>Precinct 879—Municipal Electric Utility (2L)</b><br>Total votes: 224<br>Turnout: 31.3%<br>—<br>For The Measure: 62.1%<br>Against The Measure: 37.9%</b>',color:'#cf6b77',icon:'',scale:0.373});
+				GV_Draw_Marker({lat:40.0119870,lon:-105.2794700,name:'',desc:'<b>Precinct 880—Municipal Electric Utility (2L)</b><br>Total votes: 110<br>Turnout: 11.3%<br>—<br>For The Measure: 69.1%<br>Against The Measure: 30.9%</b>',color:'#a30c25',icon:'',scale:0.271});
+				GV_Draw_Marker({lat:40.0151430,lon:-105.2875810,name:'',desc:'<b>Precinct 881—Municipal Electric Utility (2L)</b><br>Total votes: 294<br>Turnout: 44.6%<br>—<br>For The Measure: 59.2%<br>Against The Measure: 40.8%</b>',color:'#e59ba1',icon:'',scale:0.435});
+				GV_Draw_Marker({lat:40.0184300,lon:-105.2885680,name:'',desc:'<b>Precinct 882—Municipal Electric Utility (2L)</b><br>Total votes: 370<br>Turnout: 59.8%<br>—<br>For The Measure: 45.1%<br>Against The Measure: 54.9%</b>',color:'#d6ebf9',icon:'',scale:0.503});
+				GV_Draw_Marker({lat:40.0218480,lon:-105.2900270,name:'',desc:'<b>Precinct 883—Municipal Electric Utility (2L)</b><br>Total votes: 412<br>Turnout: 54%<br>—<br>For The Measure: 56.6%<br>Against The Measure: 43.4%</b>',color:'#f5c4c5',icon:'',scale:0.54});
+				GV_Draw_Marker({lat:40.0202700,lon:-105.2826890,name:'',desc:'<b>Precinct 884—Municipal Electric Utility (2L)</b><br>Total votes: 353<br>Turnout: 39.8%<br>—<br>For The Measure: 55.8%<br>Against The Measure: 44.2%</b>',color:'#f9cfcf',icon:'',scale:0.488});
+				GV_Draw_Marker({lat:40.0268760,lon:-105.2873660,name:'',desc:'<b>Precinct 885—Municipal Electric Utility (2L)</b><br>Total votes: 304<br>Turnout: 52.2%<br>—<br>For The Measure: 53.6%<br>Against The Measure: 46.4%</b>',color:'#ffe9e8',icon:'',scale:0.444});
+				GV_Draw_Marker({lat:40.0309830,lon:-105.2879240,name:'',desc:'<b>Precinct 886—Municipal Electric Utility (2L)</b><br>Total votes: 451<br>Turnout: 57.3%<br>—<br>For The Measure: 39.7%<br>Against The Measure: 60.3%</b>',color:'#88abd5',icon:'',scale:0.575});
+				GV_Draw_Marker({lat:40.0358790,lon:-105.2874950,name:'',desc:'<b>Precinct 887—Municipal Electric Utility (2L)</b><br>Total votes: 594<br>Turnout: 60.7%<br>—<br>For The Measure: 41.6%<br>Against The Measure: 58.4%</b>',color:'#a6c5e4',icon:'',scale:0.702});
+				GV_Draw_Marker({lat:40.0446850,lon:-105.2879670,name:'',desc:'<b>Precinct 888—Municipal Electric Utility (2L)</b><br>Total votes: 516<br>Turnout: 63.8%<br>—<br>For The Measure: 41.3%<br>Against The Measure: 58.7%</b>',color:'#a1c1e2',icon:'',scale:0.633});
+				
+				GV_Finish_Map();
+					
+			  
+			}
+			GV_Map(); // execute the above code
+			// http://www.gpsvisualizer.com/map_input?bg_opacity=100&colorize_gray=0&colorize_max=70&colorize_min=30&colorize_reverse=1&colorize_spectrum=https%3A%2F%2Fphotos.smugmug.com%2FOther%2FPictures-Without-Context%2Fi-CSNPkRT%2F0%2F46015e8b%2FO%2Fcolors.png&drawing_title=Measure%202L%20%28Boulder%20Electric%20Utility%29&form=data&hue1=240&hue2=0&lightness=90&special=data&synthesize_desc=%3Cb%3E%7Bdesc%7D%E2%80%94Municipal%20Electric%20Utility%20%282L%29%3C%2Fb%3E%3Cbr%3ETotal%20votes%3A%20%7Bn%7D%3Cbr%3ETurnout%3A%20%7BTurnout%7D%25%3Cbr%3E%E2%80%94%3Cbr%3EFor%20The%20Measure%3A%20%7BForTheMeasure%7D%25%3Cbr%3EAgainst%20The%20Measure%3A%20%7BOpposed%7D%25%3C%2Fb%3E&units=us&wpt_colorize=custom&wpt_colorize_custom=ForTheMeasure&wpt_max_size=28&wpt_min_size=7&wpt_resize=custom&wpt_resize_custom=n
+		</script>
+		
+		
+		
+	</body>
+
+</html>
